@@ -1,5 +1,6 @@
 (() => {
   const data = window.AUTO_RESEARCH_DATA;
+  const tableDetails = window.AUTO_RESEARCH_TABLE_DETAILS || {};
   if (!data) return;
 
   const statusMeta = {
@@ -37,6 +38,11 @@
   $("#stat-total").textContent = data.items.length;
   $("#stat-open").textContent = officialCount;
 
+  // The requested five-column research table is the primary content, so place
+  // it immediately after the section navigation while keeping the source HTML maintainable.
+  const surveySection = $("#catalog");
+  $(".section-nav").after(surveySection);
+
   const themeButton = $("#theme-button");
   const savedTheme = localStorage.getItem("autoresearch-theme");
   if (savedTheme === "dark") document.documentElement.dataset.theme = "dark";
@@ -65,50 +71,49 @@
     capabilityFilter.insertAdjacentHTML("beforeend", `<option value="${index}">${escapeHtml(label)}：解决 / 部分</option>`);
   });
 
-  const renderLinks = (item) => {
+  const displayUrl = (url) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const renderSourceLinks = (item) => {
     const links = [];
-    if (item.paper) links.push(`<a href="${escapeHtml(item.paper)}" target="_blank" rel="noopener">论文 · ${escapeHtml(item.arxiv || "arXiv")} ↗</a>`);
-    if (item.github) links.push(`<a href="${escapeHtml(item.github)}" target="_blank" rel="noopener">GitHub ↗</a>`);
-    if (item.project) links.push(`<a href="${escapeHtml(item.project)}" target="_blank" rel="noopener">项目主页 ↗</a>`);
+    if (item.github) links.push(`<a class="source-url" href="${escapeHtml(item.github)}" target="_blank" rel="noopener"><b>GitHub ↗</b><code>${escapeHtml(displayUrl(item.github))}</code></a>`);
+    if (item.project) links.push(`<a class="source-url" href="${escapeHtml(item.project)}" target="_blank" rel="noopener"><b>项目主页 ↗</b><code>${escapeHtml(displayUrl(item.project))}</code></a>`);
+    if (!links.length) links.push(`<p class="no-repo">未找到可核验的官方开源网址</p>`);
     return links.join("");
   };
 
-  const renderCard = (item) => {
+  const renderSurveyRow = (item) => {
     const [statusLabel, statusClass] = statusMeta[item.status] || [item.status, "paper"];
-    const miniCaps = item.caps.map((state, index) => {
-      const [, className] = capMeta[state];
-      return `<span class="mini-cap"><i class="dot ${className}"></i>${escapeHtml(data.capabilityOrder[index][1])}</span>`;
-    }).join("");
+    const detail = tableDetails[item.id] || {};
     const starLabel = formatStars(item.stars);
+    const mainHref = item.paper || item.github || item.project || "#";
     return `
-      <article class="work-card" id="item-${escapeHtml(item.id)}" data-cluster="${escapeHtml(item.cluster)}">
-        <div class="work-card-top">
-          <div class="badge-row">
-            <span class="badge priority-${item.priority.toLowerCase()}">PRIORITY ${item.priority}</span>
-            <span class="badge ${statusClass}">${escapeHtml(statusLabel)}</span>
-            <span class="badge">${escapeHtml(clusterNames[item.cluster] || item.cluster)}</span>
-            ${item.license ? `<span class="badge">${escapeHtml(item.license)}</span>` : ""}
-          </div>
-          ${starLabel ? `<span class="stars">★ ${escapeHtml(starLabel)}</span>` : ""}
-        </div>
-        <h3>${escapeHtml(item.name)}</h3>
-        <p class="full-title">${escapeHtml(item.title)}</p>
-        <p class="method">${escapeHtml(item.method)}</p>
-        <p class="best"><b>最适合：</b>${escapeHtml(item.best)}</p>
-        <div class="card-copy">
-          <p><b>判断：</b>${escapeHtml(item.assessment)}</p>
-          <p class="gap"><b>缺口：</b>${escapeHtml(item.gap)}</p>
-        </div>
-        <div class="mini-caps" aria-label="能力覆盖">${miniCaps}</div>
-        <div class="work-links">${renderLinks(item)}</div>
-      </article>`;
+      <tr id="item-${escapeHtml(item.id)}" data-priority="${item.priority}">
+        <th scope="row" class="paper-cell">
+          <div class="row-badges"><span class="badge priority-${item.priority.toLowerCase()}">PRIORITY ${item.priority}</span>${item.arxiv ? `<span class="badge">arXiv ${escapeHtml(item.arxiv)}</span>` : `<span class="badge">Repository</span>`}</div>
+          <a class="paper-title" href="${escapeHtml(mainHref)}" target="_blank" rel="noopener">${escapeHtml(item.title)} ↗</a>
+          <p>${escapeHtml(item.method)}</p>
+        </th>
+        <td class="opensource-cell">
+          <div class="source-status"><span class="badge ${statusClass}">${escapeHtml(statusLabel)}</span>${item.license ? `<span class="badge">${escapeHtml(item.license)}</span>` : ""}${starLabel ? `<span class="stars">★ ${escapeHtml(starLabel)}</span>` : ""}</div>
+          ${renderSourceLinks(item)}
+        </td>
+        <td class="domain-cell"><span>${escapeHtml(detail.domain || clusterNames[item.cluster] || item.method)}</span><small>${escapeHtml(item.best)}</small></td>
+        <td class="flow-cell">
+          <div class="flow-block input"><b>输入</b><p>${escapeHtml(detail.input || "—")}</p></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-block output"><b>输出</b><p>${escapeHtml(detail.output || "—")}</p></div>
+        </td>
+        <td class="need-cell">
+          <div class="need-block"><b>真正用户需求</b><p>${escapeHtml(detail.need || item.best)}</p></div>
+          <div class="pain-block"><b>用户痛点</b><p>${escapeHtml(detail.pain || item.gap)}</p></div>
+        </td>
+      </tr>`;
   };
 
   const searchInput = $("#search-input");
   const priorityFilter = $("#priority-filter");
   const availabilityFilter = $("#availability-filter");
   const clearFilters = $("#clear-filters");
-  const grid = $("#catalog-grid");
+  const grid = $("#survey-body");
   const resultCount = $("#result-count");
   const emptyState = $("#empty-state");
 
@@ -119,7 +124,8 @@
     const capability = capabilityFilter.value;
 
     const filtered = data.items.filter((item) => {
-      const haystack = [item.name, item.title, item.method, item.best, item.assessment, item.gap, item.arxiv, clusterNames[item.cluster]].join(" ").toLowerCase();
+      const detail = tableDetails[item.id] || {};
+      const haystack = [item.name, item.title, item.method, item.best, item.assessment, item.gap, item.arxiv, clusterNames[item.cluster], detail.domain, detail.input, detail.output, detail.need, detail.pain].join(" ").toLowerCase();
       const statusGroup = statusMeta[item.status]?.[2] || "paper";
       const capMatch = capability === "all" || ["solves", "partial"].includes(item.caps[Number(capability)]);
       return (!query || haystack.includes(query))
@@ -128,7 +134,7 @@
         && capMatch;
     });
 
-    grid.innerHTML = filtered.map(renderCard).join("");
+    grid.innerHTML = filtered.map(renderSurveyRow).join("");
     resultCount.textContent = `显示 ${filtered.length} / ${data.items.length} 项`;
     emptyState.hidden = filtered.length !== 0;
   };

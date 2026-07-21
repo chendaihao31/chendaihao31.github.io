@@ -17,6 +17,7 @@
       ├─ index.html
       ├─ styles.css
       ├─ data.js
+      ├─ table-data.js
       └─ app.js
 ```
 
@@ -33,7 +34,8 @@
 
 把本目录中的内容上传到 `chendaihao31/chendaihao31.github.io` 仓库根目录即可。
 
-Auto Research 页面当前为完整调研版，收录 31 项工作。`data.js` 保存结构化条目；
+Auto Research 页面当前为完整调研版，收录 31 项工作。`data.js` 保存论文与开源信息，
+`table-data.js` 保存领域、输入输出、真正用户需求和用户痛点；
 以后补充论文或项目时，优先新增数据项，不需要重写页面布局。
 
 ## 以后新增内容

@@ -31,8 +31,8 @@
         <h1>自主研究不靠单一模型，<br><em>而靠一条受控探索流水线。</em></h1>
         <p class="lead">从 31 项论文、开源项目与工程实践中，拆出可靠性、优化、搜索、记忆、审计、门控与执行八个能力面。重点不是“谁能一键写论文”，而是怎样把一次研究变成可验证、可分叉、可恢复、可复用的长期系统。</p>
         <div class="hero-actions">
-          <a class="button primary" href="#verdict">先看结论</a>
-          <a class="button ghost" href="#catalog">浏览完整目录</a>
+          <a class="button primary" href="#catalog">查看完整表格</a>
+          <a class="button ghost" href="#verdict">再看结论</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="调研概览">
@@ -47,17 +47,17 @@
     </section>
 
     <nav class="section-nav" aria-label="页面目录">
+      <a href="#catalog">调研主表</a>
       <a href="#verdict">核心判断</a>
       <a href="#needs">用户需求</a>
       <a href="#stack">推荐架构</a>
       <a href="#matrix">能力矩阵</a>
-      <a href="#catalog">完整目录</a>
       <a href="#method">口径说明</a>
     </nav>
 
     <section id="verdict" class="section verdict-section">
       <div class="section-heading">
-        <p class="section-index">01 · RESEARCH VERDICT</p>
+        <p class="section-index">02 · RESEARCH VERDICT</p>
         <h2>这批工作的共同结论</h2>
         <p>AI Scientist 的主要瓶颈已经从“会不会调用工具”转向“搜索与证据是否受控”。</p>
       </div>
@@ -105,7 +105,7 @@
     <section id="needs" class="section needs-section">
       <div class="section-heading split-heading">
         <div>
-          <p class="section-index">02 · REAL USER NEEDS</p>
+          <p class="section-index">03 · REAL USER NEEDS</p>
           <h2>真正用户需求 → 用户痛点</h2>
         </div>
         <p>把“我想要一个 AI Scientist”翻译成可设计、可验收的工程问题。</p>
@@ -124,7 +124,7 @@
 
     <section id="stack" class="section stack-section">
       <div class="section-heading">
-        <p class="section-index">03 · RECOMMENDED STACK</p>
+        <p class="section-index">04 · RECOMMENDED STACK</p>
         <h2>如果现在搭一个系统，我会这样拼</h2>
         <p>没有一项工作独立覆盖八个能力面；合理答案是一组边界清楚、相互校验的模块。</p>
       </div>
@@ -153,7 +153,7 @@
     <section id="matrix" class="section matrix-section">
       <div class="section-heading split-heading">
         <div>
-          <p class="section-index">04 · CAPABILITY MATRIX</p>
+          <p class="section-index">05 · CAPABILITY MATRIX</p>
           <h2>31 项工作的能力覆盖</h2>
         </div>
         <div class="legend" aria-label="能力标记图例">
@@ -174,9 +174,9 @@
 
     <section id="catalog" class="section catalog-section">
       <div class="section-heading">
-        <p class="section-index">05 · COMPLETE CATALOG</p>
-        <h2>论文 / 开源 / 领域 / 输入输出</h2>
-        <p>每项都保留“适合做什么、当前判断、主要缺口”和可访问网址。搜索支持标题、方法、场景与结论。</p>
+        <p class="section-index">01 · REQUIRED RESEARCH TABLE</p>
+        <h2>Auto Research 完整调研主表</h2>
+        <p>严格按“论文 / 开源 / 领域 / 输入输出 + 真正用户需求 → 用户痛点”整理。开源列直接给出可访问网址。</p>
       </div>
 
       <div class="catalog-tools">
@@ -200,7 +200,21 @@
         <p class="result-count" id="result-count" aria-live="polite"></p>
       </div>
 
-      <div class="catalog-grid" id="catalog-grid"></div>
+      <div class="survey-table-wrap">
+        <table class="survey-table">
+          <thead>
+            <tr>
+              <th scope="col">Auto Research 论文 / 项目</th>
+              <th scope="col">开源情况 / 网址</th>
+              <th scope="col">领域</th>
+              <th scope="col">输入 → 输出</th>
+              <th scope="col">真正用户需求 → 用户痛点</th>
+            </tr>
+          </thead>
+          <tbody id="survey-body"></tbody>
+        </table>
+      </div>
+      <p class="table-scroll-hint">表格可横向滚动；表头和论文列会保持固定。网址均可直接点击。</p>
       <div class="empty-state" id="empty-state" hidden>
         <b>没有匹配项</b><p>换一个关键词，或清除筛选条件。</p>
       </div>
@@ -231,6 +245,7 @@
   </footer>
 
   <script src="./data.js"></script>
+  <script src="./table-data.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
