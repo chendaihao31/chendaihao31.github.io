@@ -1,9 +1,6 @@
-# ─────────────────────────────────────────────────────────────
-# Auto Research · GitHub Pages / Jekyll configuration
+# Research Atlas · GitHub Pages / Jekyll
 # Repository: chendaihao31/chendaihao31.github.io
-# ─────────────────────────────────────────────────────────────
 
-# Site identity
 title: "Research Atlas"
 description: >-
   收录论文调研、研究演示、开源工具与实验笔记，
@@ -12,17 +9,14 @@ author: "chendaihao31"
 lang: "zh-CN"
 timezone: "Asia/Shanghai"
 
-# GitHub Pages user-site address
+# GitHub Pages user site: https://chendaihao31.github.io/
 url: "https://chendaihao31.github.io"
 baseurl: ""
 repository: "chendaihao31/chendaihao31.github.io"
 
-# Appearance
-# Cayman 是 GitHub Pages 官方支持的主题，适合研究项目主页。
 theme: jekyll-theme-cayman
 show_downloads: false
 
-# Content rendering
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
@@ -34,13 +28,11 @@ kramdown:
   syntax_highlighter: rouge
   math_engine: mathjax
 
-# GitHub Pages supported plugins
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
 
-# Default metadata for future Markdown/HTML pages with front matter
 defaults:
   - scope:
       path: ""
@@ -55,7 +47,6 @@ defaults:
     values:
       category: "Research Presentation"
 
-# Build behavior
 sass:
   style: compressed
 
@@ -70,7 +61,6 @@ exclude:
   - .idea
   - .vscode
 
-# Custom variables available as site.* in Liquid templates
 navigation:
   - title: "首页"
     url: "/"

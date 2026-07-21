@@ -9,15 +9,15 @@
   "items": [
     {
       "id": "auto-research-landscape-2026",
-      "title": "Auto Research 调研整理",
-      "description": "从可靠性、混合优化、种群搜索、失败记忆、外部监督与长程探索六个维度，梳理代表性论文、开源项目及真实用户痛点。",
+      "title": "Auto Research 全景图谱",
+      "description": "31 项论文、开源项目与工程实践的完整调研：可靠性、混合优化、种群搜索、失败记忆、独立审计、方案门控与长程智能体。",
       "url": "/presentations/Auto-Research/",
       "category": "research",
       "date": "2026-07-21",
-      "readingTime": "约 12 分钟",
-      "status": "持续更新",
+      "readingTime": "约 18 分钟",
+      "status": "完整调研版",
       "featured": true,
-      "tags": ["AI Scientist", "Auto Research", "HPO", "Agent"]
+      "tags": ["AI Scientist", "Auto Research", "HPO", "Agent", "31 项工作"]
     }
   ]
 }

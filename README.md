@@ -14,7 +14,10 @@
 │  └─ contents.json
 └─ presentations/
    └─ Auto-Research/
-      └─ index.html
+      ├─ index.html
+      ├─ styles.css
+      ├─ data.js
+      └─ app.js
 ```
 
 当前仓库配置为 `chendaihao31/chendaihao31.github.io`，启用 GitHub Pages 后：
@@ -29,6 +32,9 @@
 - Folder：`/(root)`
 
 把本目录中的内容上传到 `chendaihao31/chendaihao31.github.io` 仓库根目录即可。
+
+Auto Research 页面当前为完整调研版，收录 31 项工作。`data.js` 保存结构化条目；
+以后补充论文或项目时，优先新增数据项，不需要重写页面布局。
 
 ## 以后新增内容
 
