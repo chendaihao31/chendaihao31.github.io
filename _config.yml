@@ -1,0 +1,88 @@
+# ─────────────────────────────────────────────────────────────
+# Auto Research · GitHub Pages / Jekyll configuration
+# Repository: chendaihao31/chendaihao31.github.io
+# ─────────────────────────────────────────────────────────────
+
+# Site identity
+title: "Auto Research Atlas"
+description: >-
+  面向可靠性、混合优化、种群搜索、失败记忆与长程智能体的
+  Auto Research 论文、开源项目和工程实践整理。
+author: "Auto Research Team"
+lang: "zh-CN"
+timezone: "Asia/Shanghai"
+
+# GitHub Pages user-site address
+url: "https://chendaihao31.github.io"
+baseurl: ""
+repository: "chendaihao31/chendaihao31.github.io"
+
+# Appearance
+# Cayman 是 GitHub Pages 官方支持的主题，适合研究项目主页。
+theme: jekyll-theme-cayman
+show_downloads: false
+
+# Content rendering
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+future: false
+unpublished: false
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  math_engine: mathjax
+
+# GitHub Pages supported plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Default metadata for future Markdown/HTML pages with front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      lang: "zh-CN"
+      author: "Auto Research Team"
+      image: null
+  - scope:
+      path: "presentations"
+      type: "pages"
+    values:
+      category: "Research Presentation"
+
+# Build behavior
+sass:
+  style: compressed
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - scripts
+  - tmp
+  - .idea
+  - .vscode
+
+# Custom variables available as site.* in Liquid templates
+navigation:
+  - title: "首页"
+    url: "/"
+  - title: "Auto Research"
+    url: "/presentations/Auto-Research/"
+
+research:
+  updated_at: "2026-07-21"
+  topics:
+    - "AI Scientist 可靠性"
+    - "LLM + HPO"
+    - "种群与分支搜索"
+    - "失败记忆"
+    - "科研方案评测"
+    - "长程智能体"
