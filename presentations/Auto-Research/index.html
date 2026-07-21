@@ -50,6 +50,18 @@
 
     .hero-inner, main, footer { max-width: 1240px; margin: 0 auto; }
 
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .back-home:hover { color: #fff; text-decoration: none; }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -345,6 +357,7 @@
 <body>
   <header class="hero">
     <div class="hero-inner">
+      <a class="back-home" href="/">← 返回 Research Atlas</a>
       <div class="eyebrow">AUTO RESEARCH · LANDSCAPE REVIEW</div>
       <h1>Auto Research 调研整理</h1>
       <p class="subtitle">从可靠性、混合优化、种群搜索、失败记忆、外部监督与长程探索六个维度，梳理当前代表性论文、开源项目及真实用户痛点。</p>

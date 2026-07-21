@@ -1,24 +1,163 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Research Presentations</title>
-  <style>
-    body { margin: 0; font-family: "Microsoft YaHei", sans-serif; color: #172b4d; background: #f4f7fb; }
-    main { max-width: 860px; margin: 80px auto; padding: 0 24px; }
-    .card { padding: 30px; border: 1px solid #d9e2ec; border-radius: 18px; background: #fff; box-shadow: 0 12px 36px rgba(16,42,67,.08); }
-    h1 { margin-top: 0; color: #102a43; }
-    a { display: inline-block; margin-top: 14px; padding: 10px 15px; border-radius: 9px; color: #fff; background: #1976d2; text-decoration: none; }
-  </style>
+  <meta name="description" content="Research Atlas：论文调研、研究演示、开源工具与实验笔记。">
+  <meta name="theme-color" content="#102a43">
+  <meta property="og:title" content="Research Atlas">
+  <meta property="og:description" content="论文调研、研究演示、开源工具与实验笔记。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chendaihao31.github.io/">
+  <title>Research Atlas · chendaihao31</title>
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/home.css">
+  <script>
+    const savedTheme = localStorage.getItem('research-atlas-theme');
+    const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.dataset.theme = savedTheme || (preferredDark ? 'dark' : 'light');
+  </script>
 </head>
 <body>
-  <main>
-    <section class="card">
-      <h1>Research Presentations</h1>
-      <p>个人研究调研与分享页面。</p>
-      <a href="./presentations/Auto-Research/">打开 Auto Research 调研整理</a>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/" aria-label="Research Atlas 首页">
+        <span class="brand-mark" aria-hidden="true">RA</span>
+        <span>
+          <strong>Research Atlas</strong>
+          <small>chendaihao31</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#featured">精选</a>
+        <a href="#library">内容库</a>
+        <a href="#about">关于</a>
+        <a href="https://github.com/chendaihao31" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换深浅色主题">
+        <span class="sun" aria-hidden="true">☀</span>
+        <span class="moon" aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="hero-grid shell">
+        <div class="hero-copy">
+          <p class="kicker"><span></span> RESEARCH · SYSTEMS · OPEN SOURCE</p>
+          <h1>把复杂研究，整理成<br><em>可以继续生长的知识。</em></h1>
+          <p class="hero-text">这里收录论文调研、研究演示、开源工具与实验笔记。每一份内容都尽量回答：它解决了什么问题、如何验证，以及真正值得复用的部分是什么。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#library">浏览内容库 <span>↘</span></a>
+            <a class="button secondary" href="/presentations/Auto-Research/">查看最新调研</a>
+          </div>
+          <dl class="stats" aria-label="站点统计">
+            <div><dt id="stat-items">1</dt><dd>篇内容</dd></div>
+            <div><dt id="stat-categories">1</dt><dd>个主题</dd></div>
+            <div><dt id="stat-year">2026</dt><dd>持续更新</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="visual-card card-a">
+            <span>01</span>
+            <strong>Evidence</strong>
+            <small>证据与审计</small>
+          </div>
+          <div class="visual-card card-b">
+            <span>02</span>
+            <strong>Search</strong>
+            <small>探索与优化</small>
+          </div>
+          <div class="visual-card card-c">
+            <span>03</span>
+            <strong>Memory</strong>
+            <small>失败与积累</small>
+          </div>
+          <div class="visual-core">
+            <span>RESEARCH</span>
+            <strong>ATLAS</strong>
+          </div>
+          <i class="dot dot-a"></i><i class="dot dot-b"></i><i class="dot dot-c"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="featured">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / FEATURED</p>
+          <h2>近期精选</h2>
+        </div>
+        <p>选择信息密度高、可复用性强的调研与演示。</p>
+      </div>
+      <div id="featured-grid" class="featured-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="section shell" id="library">
+      <div class="section-heading library-heading">
+        <div>
+          <p class="section-index">02 / LIBRARY</p>
+          <h2>全部内容</h2>
+        </div>
+        <p>以后新增的页面会自动出现在这里。</p>
+      </div>
+
+      <div class="library-tools">
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="content-search" type="search" placeholder="搜索标题、摘要或标签……" autocomplete="off">
+        </label>
+        <div class="filters" id="category-filters" aria-label="内容分类"></div>
+      </div>
+
+      <div id="content-grid" class="content-grid" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <span>⌁</span>
+        <h3>没有找到匹配内容</h3>
+        <p>换一个关键词或分类试试。</p>
+      </div>
+    </section>
+
+    <section class="section shell" id="about">
+      <div class="about-panel">
+        <div class="about-copy">
+          <p class="section-index">03 / PRINCIPLES</p>
+          <h2>这个站点关注什么？</h2>
+          <p>不只收集“又一个新系统”，更关注研究过程是否可靠、工具是否真正可用，以及失败经验能否被下一次研究继承。</p>
+        </div>
+        <div class="principles">
+          <article><span>01</span><h3>证据优先</h3><p>区分论文主张、实验结果和可复现事实。</p></article>
+          <article><span>02</span><h3>面向使用</h3><p>从输入输出、用户需求和痛点理解工作价值。</p></article>
+          <article><span>03</span><h3>持续积累</h3><p>让调研、工具和失败记录形成长期知识资产。</p></article>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div>
+        <strong>Research Atlas</strong>
+        <p>Notes on research, systems and open source.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/chendaihao31">GitHub</a>
+        <a href="#content">回到顶部 ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <div class="noscript">此首页需要 JavaScript 来读取内容清单。你仍可直接访问 <a href="/presentations/Auto-Research/">Auto Research 调研</a>。</div>
+  </noscript>
+  <script src="/assets/js/home.js" defer></script>
 </body>
 </html>

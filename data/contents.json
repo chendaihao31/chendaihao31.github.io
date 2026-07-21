@@ -1,0 +1,23 @@
+{
+  "updated": "2026-07-21",
+  "categories": [
+    { "id": "research", "label": "研究调研" },
+    { "id": "presentation", "label": "演示分享" },
+    { "id": "tool", "label": "工具项目" },
+    { "id": "note", "label": "实验笔记" }
+  ],
+  "items": [
+    {
+      "id": "auto-research-landscape-2026",
+      "title": "Auto Research 调研整理",
+      "description": "从可靠性、混合优化、种群搜索、失败记忆、外部监督与长程探索六个维度，梳理代表性论文、开源项目及真实用户痛点。",
+      "url": "/presentations/Auto-Research/",
+      "category": "research",
+      "date": "2026-07-21",
+      "readingTime": "约 12 分钟",
+      "status": "持续更新",
+      "featured": true,
+      "tags": ["AI Scientist", "Auto Research", "HPO", "Agent"]
+    }
+  ]
+}

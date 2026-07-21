@@ -4,11 +4,11 @@
 # ─────────────────────────────────────────────────────────────
 
 # Site identity
-title: "Auto Research Atlas"
+title: "Research Atlas"
 description: >-
-  面向可靠性、混合优化、种群搜索、失败记忆与长程智能体的
-  Auto Research 论文、开源项目和工程实践整理。
-author: "Auto Research Team"
+  收录论文调研、研究演示、开源工具与实验笔记，
+  关注证据、复现、真实用户需求与可积累的研究经验。
+author: "chendaihao31"
 lang: "zh-CN"
 timezone: "Asia/Shanghai"
 
@@ -47,7 +47,7 @@ defaults:
       type: "pages"
     values:
       lang: "zh-CN"
-      author: "Auto Research Team"
+      author: "chendaihao31"
       image: null
   - scope:
       path: "presentations"
