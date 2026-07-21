@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto Research 调研整理</title>
+  <style>
+    :root {
+      --navy: #102a43;
+      --navy-2: #243b53;
+      --blue: #1976d2;
+      --cyan: #2f9eaa;
+      --ink: #172b4d;
+      --muted: #52667a;
+      --line: #d9e2ec;
+      --paper: #ffffff;
+      --wash: #f4f7fb;
+      --green-bg: #e8f7ef;
+      --green: #16794d;
+      --amber-bg: #fff5dc;
+      --amber: #9b6500;
+      --red-bg: #fff0f0;
+      --red: #b42318;
+      --shadow: 0 12px 36px rgba(16, 42, 67, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero {
+      color: #fff;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(56, 189, 248, .32), transparent 28%),
+        radial-gradient(circle at 8% 90%, rgba(45, 212, 191, .24), transparent 24%),
+        linear-gradient(135deg, #102a43 0%, #143c60 58%, #155b75 100%);
+      padding: 72px 24px 62px;
+    }
+
+    .hero-inner, main, footer { max-width: 1240px; margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      font-size: 13px;
+      letter-spacing: .05em;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 18px 0 12px;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -.035em;
+    }
+
+    .subtitle {
+      max-width: 860px;
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-size: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-meta span {
+      padding: 7px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-size: 14px;
+    }
+
+    main { padding: 34px 24px 72px; }
+
+    nav {
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: -55px 0 34px;
+      padding: 12px;
+      border: 1px solid rgba(217, 226, 236, .88);
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    nav a {
+      padding: 8px 12px;
+      border-radius: 9px;
+      color: var(--navy-2);
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    nav a:hover { background: #eaf2fb; text-decoration: none; }
+
+    section { scroll-margin-top: 90px; margin-top: 56px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    h2 { margin: 0; color: var(--navy); font-size: 28px; line-height: 1.25; }
+    h3 { margin: 0 0 8px; color: var(--navy); font-size: 18px; line-height: 1.4; }
+
+    .section-note { max-width: 680px; margin: 4px 0 0; color: var(--muted); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+      box-shadow: 0 6px 20px rgba(16, 42, 67, .05);
+    }
+
+    .metric { min-height: 150px; }
+    .metric b { display: block; margin-bottom: 8px; color: var(--blue); font-size: 30px; line-height: 1; }
+    .metric p, .card p { margin: 0; color: var(--muted); }
+
+    .callout {
+      position: relative;
+      overflow: hidden;
+      padding: 26px 28px;
+      border: 1px solid #b9dbea;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #eef8ff, #eefbf8);
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(var(--blue), var(--cyan));
+    }
+
+    .callout strong { color: var(--navy); }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .layer {
+      position: relative;
+      min-height: 154px;
+      padding: 17px;
+      border: 1px solid #cbd9e6;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .layer:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -17px;
+      z-index: 2;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      line-height: 23px;
+      font-weight: 800;
+    }
+
+    .layer .num {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background: #e8f2fc;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .layer p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .table-tools {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .table-tools input {
+      width: min(420px, 100%);
+      padding: 10px 13px;
+      border: 1px solid #b9c9d8;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      outline: none;
+    }
+
+    .table-tools input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(25,118,210,.12); }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(16, 42, 67, .05);
+    }
+
+    table { width: 100%; min-width: 1380px; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 15px 14px; border-bottom: 1px solid #e5ecf2; text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: var(--navy); color: #fff; font-size: 13px; letter-spacing: .02em; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody tr:hover { background: #eef6ff; }
+    td:first-child { min-width: 250px; font-weight: 700; color: var(--navy); }
+    td:nth-child(2) { min-width: 180px; }
+    td:nth-child(3) { min-width: 260px; }
+    td:nth-child(4) { min-width: 190px; }
+    td:nth-child(5), td:nth-child(6) { min-width: 285px; }
+
+    .links { display: grid; gap: 5px; }
+    .links a { overflow-wrap: anywhere; }
+
+    .tag {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eaf2fb;
+      color: #215b90;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 7px;
+      padding: 3px 8px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .open { background: var(--green-bg); color: var(--green); }
+    .partial { background: var(--amber-bg); color: var(--amber); }
+    .closed { background: var(--red-bg); color: var(--red); }
+
+    .work-card { display: flex; flex-direction: column; gap: 12px; }
+    .work-card .links { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+    }
+
+    .decision-card ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    .decision-card li + li { margin-top: 8px; }
+
+    footer {
+      padding: 24px 24px 42px;
+      color: #60758a;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .empty {
+      display: none;
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1050px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .architecture { grid-template-columns: repeat(3, minmax(210px, 1fr)); }
+      .layer:nth-child(3)::after { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .hero { padding-top: 52px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      nav { position: static; margin-top: -52px; }
+      .grid-4, .grid-3, .grid-2, .decision-grid { grid-template-columns: 1fr; }
+      .architecture { grid-template-columns: 1fr; }
+      .layer::after { display: none !important; }
+      .section-head { display: block; }
+    }
+
+    @media print {
+      body { background: #fff; font-size: 11px; }
+      .hero { padding: 28px 20px; }
+      h1 { font-size: 34px; }
+      nav, .table-tools { display: none; }
+      main { max-width: none; padding: 20px 0; }
+      section { margin-top: 30px; break-inside: avoid; }
+      .card, .table-wrap, .callout { box-shadow: none; }
+      .architecture { grid-template-columns: repeat(3, 1fr); }
+      .layer::after { display: none; }
+      table { min-width: 0; font-size: 9px; }
+      th, td { padding: 7px; }
+      a { color: #134f83; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">AUTO RESEARCH · LANDSCAPE REVIEW</div>
+      <h1>Auto Research 调研整理</h1>
+      <p class="subtitle">从可靠性、混合优化、种群搜索、失败记忆、外部监督与长程探索六个维度，梳理当前代表性论文、开源项目及真实用户痛点。</p>
+      <div class="hero-meta">
+        <span>核查日期：2026-07-21</span>
+        <span>核心工作：8 项</span>
+        <span>公开代码：6 项</span>
+        <span>适合团队内部分享 / 飞书复制</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav aria-label="页内导航">
+      <a href="#summary">核心结论</a>
+      <a href="#architecture">建议架构</a>
+      <a href="#comparison">核心工作对比</a>
+      <a href="#bases">开源基座补充</a>
+      <a href="#decision">选型建议</a>
+    </nav>
+
+    <section id="summary">
+      <div class="section-head">
+        <div>
+          <h2>核心结论</h2>
+          <p class="section-note">Auto Research 的主要瓶颈已不只是“模型会不会写代码”，而是研究过程能否被约束、审计、分叉和积累。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-4">
+        <article class="card metric">
+          <b>01</b>
+          <h3>可靠性必须前置</h3>
+          <p>数据泄漏、指标误用、错误 benchmark 和事后选择，常在最终论文中被隐藏，需要保留全流程轨迹与代码审计。</p>
+        </article>
+        <article class="card metric">
+          <b>02</b>
+          <h3>LLM + 算法更稳</h3>
+          <p>Centaur 表明，LLM 提供领域知识，CMA-ES 等经典优化器维护跨试验状态，两者混合优于各自单独搜索。</p>
+        </article>
+        <article class="card metric">
+          <b>03</b>
+          <h3>单路径容易锁死</h3>
+          <p>GEAR 与 SwarmResearch 指向同一问题：长程单路径贪心容易固化，应通过种群、mutation、crossover 和隔离分支保留多样性。</p>
+        </article>
+        <article class="card metric">
+          <b>04</b>
+          <h3>失败应成为资产</h3>
+          <p>Negative Knowledge 与 Arbor 都强调将失败结构化、可检索、可迁移，使一次试错能够减少未来团队和项目的重复成本。</p>
+        </article>
+      </div>
+
+      <div class="callout" style="margin-top:16px">
+        <strong>综合判断：</strong>若任务是具有明确 evaluator 的模型、数据、harness 或代码优化，Arbor 更适合作为通用开源基座；若目标是 topic → 实验 → 论文的端到端流程，AutoResearchClaw 覆盖更完整。无论采用哪个基座，都建议外接确定性评价器或经典优化器，并引入种群搜索、失败记忆和独立审计。SoundnessBench 提醒我们：当前 LLM 还不足以独立承担研究计划的第一道可靠性门。
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="section-head">
+        <div>
+          <h2>建议的 Auto Research 组合架构</h2>
+          <p class="section-note">将各论文的优势组合成一条可执行的研究闭环，而不是押注单一智能体。</p>
+        </div>
+      </div>
+
+      <div class="architecture">
+        <article class="layer">
+          <span class="num">1</span>
+          <h3>任务与证据契约</h3>
+          <p>预先锁定数据切分、指标、benchmark、预算与成功标准，降低事后选择空间。</p>
+        </article>
+        <article class="layer">
+          <span class="num">2</span>
+          <h3>计划生成与外部监督</h3>
+          <p>LLM 生成假设，但由外部模型、规则和确定性检查器共同监督，不依赖单一 LLM 自评。</p>
+        </article>
+        <article class="layer">
+          <span class="num">3</span>
+          <h3>混合优化</h3>
+          <p>LLM 负责语义修改与领域知识，CMA-ES/HPO 维护数值状态、预算和候选配置。</p>
+        </article>
+        <article class="layer">
+          <span class="num">4</span>
+          <h3>种群与分支执行</h3>
+          <p>并行保留多条路线，通过 mutation、crossover 和隔离分支避免长上下文固化。</p>
+        </article>
+        <article class="layer">
+          <span class="num">5</span>
+          <h3>失败记忆</h3>
+          <p>把代码、日志、原因、适用边界和替代建议存为结构化负知识，跨智能体共享。</p>
+        </article>
+        <article class="layer">
+          <span class="num">6</span>
+          <h3>独立审计与验证</h3>
+          <p>在 held-out 数据上复验，审计泄漏、指标、benchmark、claim-evidence 和复现链。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <div class="section-head">
+        <div>
+          <h2>核心工作对比</h2>
+          <p class="section-note">按照“论文 / 开源 / 领域 / 输入输出 / 用户需求与痛点”的统一格式整理。</p>
+        </div>
+      </div>
+
+      <div class="table-tools">
+        <input id="search" type="search" placeholder="搜索论文、领域、痛点或网址……" aria-label="搜索对比表">
+      </div>
+      <div class="table-wrap">
+        <table id="research-table">
+          <thead>
+            <tr>
+              <th>Auto Research 论文 / 工作</th>
+              <th>论文网址</th>
+              <th>开源情况及网址</th>
+              <th>领域</th>
+              <th>输入 → 输出</th>
+              <th>真正用户需求 → 用户痛点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>The More You Automate, the Less You See: Hidden Pitfalls of AI Scientist Systems</td>
+              <td><a href="https://arxiv.org/abs/2509.08713">arXiv:2509.08713</a></td>
+              <td><span class="status closed">未发现独立代码仓库</span><div class="links"><a href="https://arxiv.org/abs/2509.08713">论文页面</a></div></td>
+              <td><span class="tag">AI Scientist 可靠性</span><span class="tag">科研审计</span></td>
+              <td>完整运行轨迹、代码和生成论文 → 四类失败模式的检测结果与审计建议。</td>
+              <td>需求：判断自动生成研究是否可信、可复现。<br>痛点：最终论文会隐藏错误 benchmark、数据泄漏、指标误用和事后选择偏差，中间流程难以审计。</td>
+            </tr>
+            <tr>
+              <td>Can LLMs Beat Classical Hyperparameter Optimization Algorithms? / Centaur</td>
+              <td><a href="https://arxiv.org/abs/2603.24647">arXiv:2603.24647</a></td>
+              <td><span class="status open">代码已公开</span><div class="links"><a href="https://github.com/ferreirafabio/autoresearch-automl">GitHub</a><a href="https://ferreirafabio.github.io/autoresearch-automl/">在线 Demo</a></div></td>
+              <td><span class="tag">AutoML</span><span class="tag">HPO</span><span class="tag">代码优化</span></td>
+              <td>搜索空间、训练代码、试验历史和 CMA-ES 状态 → 下一组参数/代码修改与最优配置。</td>
+              <td>需求：在有限 GPU 预算下稳定找到更优训练方案。<br>痛点：纯 LLM 难以跟踪跨试验状态并容易 OOM，纯 HPO 又缺少领域知识。</td>
+            </tr>
+            <tr>
+              <td>GEAR: Genetic AutoResearch for Agentic Code Evolution</td>
+              <td><a href="https://arxiv.org/abs/2605.13874">arXiv:2605.13874</a></td>
+              <td><span class="status partial">有项目页，未发现公开代码仓库</span><div class="links"><a href="https://genetic-autoresearch.github.io/">项目主页</a><a href="https://arxiv.org/abs/2605.13874">论文页面</a></div></td>
+              <td><span class="tag">进化计算</span><span class="tag">种群式代码搜索</span></td>
+              <td>初始程序、评价指标、预算和候选研究状态 → mutation/crossover 产生的候选种群与最佳程序。</td>
+              <td>需求：在长时间研究中保留多条潜在路线。<br>痛点：单路径贪心丢弃局部有效思想和失败信息，容易陷入局部最优。</td>
+            </tr>
+            <tr>
+              <td>Negative Knowledge as Failure-aware Shared Memory for AutoResearch</td>
+              <td><a href="https://arxiv.org/abs/2606.21024">arXiv:2606.21024</a></td>
+              <td><span class="status open">代码已公开</span><div class="links"><a href="https://github.com/hch-wang/Negative_Knowledge">GitHub</a></div></td>
+              <td><span class="tag">失败记忆</span><span class="tag">多智能体共享知识</span></td>
+              <td>失败实验的代码、日志、轨迹和推理 → 有界、结构化、带类型的负知识记录及替代建议。</td>
+              <td>需求：让一次失败减少团队未来重复试错。<br>痛点：失败只停留在个人日志或上下文中，下一智能体和下一项目会重复走入死路。</td>
+            </tr>
+            <tr>
+              <td>SoundnessBench: Can Your AI Scientist Really Tell Good Research Ideas from Bad Ones?</td>
+              <td><a href="https://arxiv.org/abs/2605.30329">arXiv:2605.30329</a></td>
+              <td><span class="status open">代码与数据已公开</span><div class="links"><a href="https://github.com/hosytuyen/SoundnessBench">GitHub</a><a href="https://huggingface.co/datasets/hosytuyen/SoundnessBench">Hugging Face 数据集</a><a href="https://hosytuyen.github.io/projects/SoundnessBench/">项目主页</a></div></td>
+              <td><span class="tag">科研方案评测</span><span class="tag">Benchmark</span></td>
+              <td>隐去结果的研究假设和实验方案 → 方法学可靠性等级、置信度和判断理由。</td>
+              <td>需求：实验前过滤方法学上不成立的方案。<br>痛点：LLM 存在乐观偏差；更严厉 prompt 又会大量误拒绝，不能独立担任第一道门。</td>
+            </tr>
+            <tr>
+              <td>SwarmResearch: Orchestrating Coding Agents for Open-Ended Discovery</td>
+              <td><a href="https://arxiv.org/abs/2607.02807">arXiv:2607.02807</a></td>
+              <td><span class="status open">代码已公开</span><div class="links"><a href="https://github.com/SwarmResearch/SwarmResearch">GitHub</a></div></td>
+              <td><span class="tag">多智能体编排</span><span class="tag">开放式代码优化</span></td>
+              <td>开放式优化目标、初始代码、评价器和预算 → 多个隔离分支的候选方案与最佳程序。</td>
+              <td>需求：让长运行智能体持续探索不同高层方法。<br>痛点：单一长上下文和单一程序状态导致高层路线锁定，只剩局部微调。</td>
+            </tr>
+            <tr>
+              <td>Toward Generalist Autonomous Research via Hypothesis-Tree Refinement / Arbor</td>
+              <td><a href="https://arxiv.org/abs/2606.11926">arXiv:2606.11926</a></td>
+              <td><span class="status open">代码与安装包已公开</span><div class="links"><a href="https://github.com/RUC-NLPIR/Arbor">GitHub</a><a href="https://ruc-nlpir.github.io/Arbor/">项目主页</a><a href="https://pypi.org/project/arbor-agent/">PyPI</a></div></td>
+              <td><span class="tag">通用自主优化</span><span class="tag">假设树</span></td>
+              <td>初始产物、优化目标、开发/测试评价器和预算 → 假设树、实验证据、提炼结论及 held-out 验证后的改进产物。</td>
+              <td>需求：用通用基座持续优化模型、harness、数据或代码。<br>痛点：普通 Agent 的试验彼此割裂、失败会遗忘，开发集提升还可能不泛化。</td>
+            </tr>
+            <tr>
+              <td>AutoResearchClaw: Self-Reinforcing Autonomous Research with Human-AI Collaboration</td>
+              <td><a href="https://arxiv.org/abs/2605.20025">arXiv:2605.20025</a></td>
+              <td><span class="status open">代码已公开</span><div class="links"><a href="https://github.com/aiming-lab/AutoResearchClaw">GitHub</a></div></td>
+              <td><span class="tag">端到端 AI Scientist</span><span class="tag">Human-in-the-loop</span></td>
+              <td>研究主题及可选人类指导、模型和实验资源 → 论文、LaTeX、文献、实验代码/指标、图表、审稿与跨轮经验。</td>
+              <td>需求：从想法推进到可核验实验和论文，并在关键点介入。<br>痛点：线性流水线会因失败中止、生成虚假结果且不能跨项目学习；逐步人工监督又过重。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="empty" class="empty">没有匹配的条目。</div>
+      </div>
+    </section>
+
+    <section id="bases">
+      <div class="section-head">
+        <div>
+          <h2>相关开源基座补充</h2>
+          <p class="section-note">这些工作已在原始调研表中出现，可作为执行、审计或长程协作模块参考。</p>
+        </div>
+      </div>
+      <div class="grid grid-3">
+        <article class="card work-card">
+          <div><span class="status open">开源</span><h3>ARIS</h3><p>适合异构模型复核、claim ledger 与 research wiki；不是种群搜索或 HPO 引擎。</p></div>
+          <div class="links"><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep">GitHub：Auto-claude-code-research-in-sleep</a></div>
+        </article>
+        <article class="card work-card">
+          <div><span class="status open">开源</span><h3>EurekAgent</h3><p>适合数学、kernel、ML 等具备明确 evaluator 的任务；当前环境设置与运行门槛相对较高。</p></div>
+          <div class="links"><a href="https://github.com/THU-Team-Eureka/EurekAgent">GitHub：THU-Team-Eureka/EurekAgent</a></div>
+        </article>
+        <article class="card work-card">
+          <div><span class="status open">实验性开源</span><h3>XScientist</h3><p>强调探索 DAG、provenance、claim-evidence anchor、重执行和分叉，适合研究过程治理。</p></div>
+          <div class="links"><a href="https://github.com/smileformylove/XScientist">GitHub：smileformylove/XScientist</a></div>
+        </article>
+        <article class="card work-card">
+          <div><span class="status partial">研究代码</span><h3>AutoScientists</h3><p>面向长时并行科学实验、动态组队以及共享成功和失败；证据治理仍需补充。</p></div>
+          <div class="links"><a href="https://github.com/mims-harvard/AutoScientists">GitHub：mims-harvard/AutoScientists</a></div>
+        </article>
+        <article class="card work-card">
+          <div><span class="status open">开源</span><h3>karpathy/autoresearch</h3><p>适合单 GPU、单指标、可快速重跑的 ML 微型研究；缺少种群、独立审计与结构化失败记忆。</p></div>
+          <div class="links"><a href="https://github.com/karpathy/autoresearch">GitHub：karpathy/autoresearch</a></div>
+        </article>
+        <article class="card work-card">
+          <div><span class="status open">模块型开源</span><h3>SwarmResearch</h3><p>用全局 Shepherd 调度多个短上下文、隔离分支的 Search Agents，重点解决高层探索多样性。</p></div>
+          <div class="links"><a href="https://github.com/SwarmResearch/SwarmResearch">GitHub：SwarmResearch/SwarmResearch</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="decision">
+      <div class="section-head">
+        <div>
+          <h2>选型与落地建议</h2>
+          <p class="section-note">先根据研究任务的输出形态选基座，再补齐它缺少的治理和搜索能力。</p>
+        </div>
+      </div>
+      <div class="decision-grid">
+        <article class="card decision-card">
+          <h3>推荐路线</h3>
+          <ul>
+            <li><strong>通用产物优化：</strong>以 Arbor 为基座，外接 Centaur/HPO 状态管理，再加入 SwarmResearch 或 GEAR 风格的种群分支。</li>
+            <li><strong>端到端论文生产：</strong>以 AutoResearchClaw 为基座，但必须添加独立审计、held-out 复验和 claim-evidence 管理。</li>
+            <li><strong>已有实验或论文复核：</strong>优先引入 ARIS 或 XScientist 的证据链和异构模型复核思路。</li>
+            <li><strong>长时开放探索：</strong>采用短上下文、多分支、共享负知识，避免单一长智能体形成思维惯性。</li>
+          </ul>
+        </article>
+        <article class="card decision-card">
+          <h3>不可省略的检查门</h3>
+          <ul>
+            <li>数据切分是否在研究前固定，是否存在训练/验证/测试泄漏。</li>
+            <li>指标是否真正对应用户目标，是否只汇报有利指标或有利轮次。</li>
+            <li>benchmark 是否匹配任务，比较对象、预算和环境是否公平。</li>
+            <li>失败、异常和未改善实验是否进入公共记忆，而不是从最终叙事中消失。</li>
+            <li>最终提升能否在 held-out 设置与独立执行环境中复现。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    本文档由本地调研表整理生成。链接与开源状态按 2026-07-21 的核查结果记录；后续使用时建议再次确认仓库活跃度、许可证和版本兼容性。
+  </footer>
+
+  <script>
+    const input = document.getElementById('search');
+    const rows = [...document.querySelectorAll('#research-table tbody tr')];
+    const empty = document.getElementById('empty');
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      rows.forEach(row => {
+        const hit = !q || row.textContent.toLowerCase().includes(q);
+        row.style.display = hit ? '' : 'none';
+        if (hit) shown += 1;
+      });
+      empty.style.display = shown ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
